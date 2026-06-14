@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Runsten</title>
+</head>
+<body style="text-align:center;font-family:sans-serif">
+
+<h1>Runsten Generator</h1>
+
+<input id="name" placeholder="Ditt namn"/>
+<br><br>
+
+<button onclick="runestone()">Skapa runsten</button>
+
+<p id="text"></p>
+<p id="runes"></p>
+
+<script>
+const runeMap = {
+  a:"ᛅ", b:"ᛒ", d:"ᛏ", e:"ᛁ", f:"ᚠ", g:"ᚴ",
+  h:"ᚼ", i:"ᛁ", k:"ᚴ", l:"ᛚ", m:"ᛘ",
+  n:"ᚾ", o:"ᚢ", r:"ᚱ", s:"ᛋ", t:"ᛏ",
+  u:"ᚢ", å:"ᚢ", ä:"ᛅ", ö:"ᚢ"
+};
+
+function toRunes(text) {
+  return text.toLowerCase().split("")
+    .map(c => c===" " ? "᛫" : runeMap[c] || "")
+    .join("");
+}
+
+function runestone() {
+  const name = document.getElementById("name").value || "Runristare";
+
+  const names = ["Ulf","Erik","Björn","Gunnar","Sigurd"];
+  const n = names[Math.floor(Math.random()*names.length)];
+
+  const phrases = [
+    `lät resa stenen efter ${n} fader sin`,
+    `reste stenen efter ${n} broder sin`,
+    `lät hugga stenen efter ${n}`
+  ];
+
+  const text = name + " " + phrases[Math.floor(Math.random()*phrases.length)];
+
+  document.getElementById("text").innerText = text;
+  document.getElementById("runes").innerText = toRunes(text);
+}
+</script>
+
+</body>
+</html>
